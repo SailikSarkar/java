@@ -1,0 +1,590 @@
+// Changing of thread priorities.
+
+//package myJavaPrograms;
+import java.lang.*;
+ public class Main extends Thread {
+    public void run (){
+        System.out.println ("\n Run method");
+    }
+    public static void main (String args[]){
+        Main mythread_1 = new Main();
+        Main mythread_2 = new Main();
+        Main mythread_3 = new Main();
+        System.out.println ("\n\n Default priority of mythread_1 "+ mythread_1.getPriority());
+        System.out.println ("\n\n Default priority of mythread_2 "+ mythread_2.getPriority());
+        System.out.println ("\n\n Default priority of mythread_3 "+ mythread_3.getPriority());
+        mythread_1.setPriority (6);
+        mythread_2.setPriority (7);
+        mythread_3.setPriority (8);
+        System.out.println ("\n\n Revised priority of mythread_1 "+ mythread_1.getPriority());
+        System.out.println ("\n\n Revised priority of mythread_2 "+ mythread_2.getPriority());
+        System.out.println ("\n\n Revised priority of mythread_3 "+ mythread_3.getPriority());
+        // Display the name of the currently executing thread among multiple threads
+        System.out.println("\n\n Currently Executing The Thread : " + Thread.currentThread().getName());
+        // Display the default priority of main thread
+        System.out.println("\n\n Priority of the main thread is : " + Thread.currentThread().getPriority());
+        // Change the priority of main thread
+        Thread.currentThread().setPriority(10);  
+        // Display the revised priority of main thread
+        System.out.println("\n\n Revised priority of main thread : " + Thread.currentThread().getPriority());  
+    }
+ }
+
+
+
+
+
+package myJavaPrograms;
+class A extends Thread
+{
+    public void run() // Main task of Thread A
+    {
+        for(int i =1;i<6;i++)
+            System.out.println ("\n i = "+ i);
+    }
+}
+class B extends Thread
+{
+    public void run() // Main task of Thread A
+    {
+        for(int j =1;j<6;j++)
+            System.out.println ("\n j = "+ j);
+    }
+}
+class C extends Thread
+{
+    public void run() // Main task of Thread A
+    {
+        for(int k =1;k<6;k++)
+            System.out.println ("\n k = "+ k);
+    }
+}
+public class Main {
+    public static void main (String args[])
+    {
+        A a = new A();  // a is the object of Thread Class A
+        B b = new B();  // b is the object of Thread Class B
+        C c = new C(); // c is the object of Thread Class C
+       
+        a.start();      // start method will initiate the run method of Class A
+        b.start();      // start method will initiate the run method of Class B
+        c.start();      // start method will initiate the run method of Class C
+       
+        System.out.println ("\n Current priority of a: "+ a.getPriority());
+        System.out.println ("\n Current priority of b: "+ b.getPriority());
+        System.out.println ("\n Current priority of c: "+ c.getPriority());
+       
+        a.setPriority(Thread.MAX_PRIORITY);
+        b.setPriority(a.getPriority()-1);
+        a.setPriority(Thread.MIN_PRIORITY);
+    }
+}
+/////-------------------------------------------
+///// OUTPUT
+////-------------------------------------------
+ Current priority of a: 5
+
+ Current priority of b: 5
+
+ Current priority of c: 5
+
+ j = 1
+
+ i = 1
+
+ k = 1
+
+ i = 2
+
+ j = 2
+
+ i = 3
+
+ k = 2
+
+ i = 4
+
+ j = 3
+
+ i = 5
+
+ k = 3
+
+ k = 4
+
+ j = 4
+
+ j = 5
+
+ k = 5
+
+
+
+
+
+
+// Exception handling using implementation of interface using class
+import java.util.*;
+import java.lang.Exception;
+//package myJavaPrograms;
+interface myoperations
+{
+    void myaddition();
+    void mysubtraction();
+    void mymultiplication();
+    void mydivision();
+}
+
+class mycalculator implements myoperations
+{
+    protected int x,y,z;
+    mycalculator(){ x = 0; y = 0; z =0;} // implicit constructor
+    mycalculator(int i, int j) // parameterized constructor
+    {
+        this.x = i;
+        this.y = j;
+    }
+  // method of interface mycalculations
+    public void myaddition()
+    {
+        this.z = this.x + this.y;
+        System.out.println ("\n "+ this.x + " + "+ this.y + " = "+ this.z);
+    }
+   
+    public void mysubtraction()
+  {
+        this.z = this.x - this.y;
+        System.out.println ("\n "+ this.x + " - "+ this.y + " = "+ this.z);
+  }
+    public void mymultiplication()
+  {
+        this.z = this.x * this.y;
+        System.out.println ("\n "+ this.x + " * "+ this.y + " = "+ this.z);
+  }
+    public void mydivision()
+    {
+        int flag = 1;    
+        try // try block
+            {
+              this.z = this.x / this.y;
+            }
+            catch (Exception e)
+            {
+              flag = 0;
+        System.out.println ("\n Division by 0");              
+          }
+      if (flag == 1)
+          System.out.println ("\n "+ this.x + " / "+ this.y + " = "+ this.z);
+    }
+  public void getdata()
+  {
+    Scanner sc = new Scanner (System.in);
+    System.out.println ("\n Enter x : ");
+    x = sc.nextInt();
+    System.out.println ("\n Enter y : ");
+    y = sc.nextInt();
+  }
+}
+public class Main
+{
+    public static void main (String args[])
+    {
+        mycalculator obj = new mycalculator ();  
+        obj.getdata();
+        obj.myaddition();
+        obj.mysubtraction();
+        obj.mymultiplication();
+        obj.mydivision();
+    }
+}
+
+
+
+
+
+
+
+
+
+//HYBRID INHERITANCE
+
+class university{
+protected int univ_id;
+university(){
+System.out.println("\n Object created for Class University");
+} // implicit constructor
+university (int uid){ // parameterised constructor
+this.univ_id = uid;
+    System.out.println ("\n University id =" + univ_id);
+}
+}
+class school extends university{
+  protected int schoolid;
+  school(){} // implicit constructor
+  school (int uid, int sid){// parameterized constructor
+    super(uid);
+    this.schoolid = sid;
+    System.out.println ("\n School id =" + schoolid);
+  }
+}
+class dept extends school{
+  protected int deptid;
+  dept(){} // implicit constructor
+  dept(int uid, int sid, int deptid){
+    super(uid, sid);
+    this.deptid = deptid;
+    System.out.println ("\n Dept id =" + deptid);
+  }
+}
+class course_1 extends dept{
+  protected int courseid;
+  course_1(){} // implicit constructor
+  course_1(int uid, int sid, int deptid, int cid){
+    super(uid, sid, deptid);
+    this.courseid = cid;
+    System.out.println ("\n Course id =" + cid);
+  }
+}
+class course_2 extends dept{
+  protected int courseid;
+  course_2(){} // implicit constructor
+  course_2(int uid, int sid, int deptid, int cid){
+    super(uid, sid, deptid);
+    this.courseid = cid;
+    System.out.println ("\n Course id =" + cid);
+  }
+}
+
+public class Main {
+public static void main(String[] args) {
+course_1 mca = new course_1(1,2,3,4);
+course_2 bsc = new course_2 (5,6,7,8);
+  }
+}
+
+
+
+
+
+
+
+
+// Java program to perform Student Database Management System
+//package myJavaPrograms;
+
+class school{
+protected int school_id;
+school(){}
+school(int s){
+this.school_id = s;
+System.out.println ("\n School id = "+ school_id);
+}
+}
+class dept extends school{
+protected int dept_id;
+dept(){}
+dept(int s, int d){
+super(s);
+this.dept_id = d;
+System.out.println ("\n Dept. id = "+ dept_id);
+}
+}
+class course extends dept{
+protected int course_id;
+course(){}
+course(int s, int d, int c){
+super(s,d);
+this.course_id = c;
+System.out.println ("\n Course id = "+ course_id);
+}
+}
+class student extends course{
+int roll;
+student(){}
+student(int sid, int did, int cid, int r){
+super(sid, did, cid);
+this.roll = r;
+System.out.println ("\n Roll of student = "+ roll);
+}
+public void myquery_1() {
+    // Display the student roll for a particular course
+    if(course_id == 3)
+      System.out.println ("\n For course id = "+course_id+" Student roll = "+ roll);
+  }
+}
+class faculty extends course{
+int empid;
+faculty(){}
+faculty(int sid, int did, int cid, int e){
+super(sid, did, cid);
+this.empid = e;
+System.out.println ("\n Employee id of faculty = "+ empid);
+}
+//public void showdata() {}
+}
+
+public class Main {
+public static void main(String[] args) {
+student oindrila = new student(1,2,3,4);
+    faculty subhasish =new faculty (1,2,3,5);
+    oindrila.myquery_1();
+}
+}
+
+
+
+
+
+
+
+
+// Hierarchical Inheritance
+package myJavaPrograms;
+
+class mca{
+protected int roll;
+protected int regno;
+mca (){ } // default constructor
+mca (int rollno, int regnum){ // explicit constructor
+this.roll = rollno;
+this.regno = regnum;
+}
+}
+
+class myios extends mca{
+int marks;
+myios (){ super(); } // default constructor
+myios (int roll, int reg, int marks){ // parameterized constructor
+super(roll, reg); // this will call the parent parameterized constructor
+this.marks = marks;
+System.out.println ("\n MyIoS :");
+System.out.println (" Roll = "+ roll +
+"\n Registration No = "+ regno +
+"\n Marks = "+ marks);
+}
+}
+class myjava extends mca{
+int marks;
+myjava (){ super(); } // default constructor
+myjava (int roll, int reg, int marks){ // parameterized constructor
+super(roll, reg); // this will call the parent parameterized constructor
+this.marks = marks;
+System.out.println ("\n MyJava :");
+System.out.println (" Roll = "+ roll +
+"\n Registration No = "+ regno +
+"\n Marks = "+ marks);
+}
+}
+class myos extends mca {
+int marks;
+myos (){ super(); } // default constructor
+myos (int roll, int reg, int marks){ // parameterized constructor
+super(roll, reg); // this will call the parent parameterized constructor
+this.marks = marks;
+System.out.println ("\n MyOS :");
+System.out.println (" Roll = "+ roll +
+"\n Registration No = "+ regno +
+"\n Marks = "+ marks);
+}
+}
+class mydbms extends mca {
+int marks;
+mydbms (){ super(); } // default constructor
+mydbms (int roll, int reg, int marks){ // parameterized constructor
+super(roll, reg); // this will call the parent parameterized constructor
+this.marks = marks;
+System.out.println ("\n MyDBMS :");
+System.out.println (" Roll = "+ roll +
+"\n Registration No = "+ regno +
+"\n Marks = "+ marks);
+}
+}
+
+public class hierarchicalInheritance_1 {
+public static void main(String[] args) {
+myios obj1 = new myios(1,2,3); // parameterized constructor of myios class is called here
+mydbms obj2 = new mydbms (4,5,6); // parameterized constructor of mydbms class is called here
+myjava obj3 = new myjava (7,8,9); // parameterized constructor of myjava class is called here
+myos obj4 = new myos (10,11,12); // parameterized constructor of myos class is called here
+} // end of main method
+} // end of class
+
+
+///=========================================
+// Hybrid Inheritance
+package myJavaPrograms;
+
+class grandparent{
+protected int gp_age;
+grandparent(){}
+grandparent(int a){
+this.gp_age = a;
+}
+}
+class parent extends grandparent{
+protected int p_age;
+parent(){ super(); }
+parent (int x, int y){
+super(x);
+this.p_age = y;
+}
+}
+class child1 extends parent{
+private int c1_age;
+child1 (){super(); }
+child1 (int a, int b, int c){
+super(a,b);
+this.c1_age = c;
+System.out.println (" Child1 :"
++ "\n Grand Parent age = "+ this.gp_age
++ "\n Parent age = "+ this.p_age
++ "\n Child age = "+ this.c1_age);
+}
+}
+class child2 extends parent{
+private int c2_age;
+child2(){ super(); }
+child2(int x, int y, int z){
+super(x,y);
+this.c2_age = z;
+System.out.println (" Child2 :"
++ "\n Grand Parent age = "+ this.gp_age
++ "\n Parent age = "+ this.p_age
++ "\n Child age = "+ this.c2_age);
+}
+}
+
+public class hybridInheritance_1 {
+public static void main(String[] args) {
+// TODO Auto-generated method stub
+child1 c1 = new child1 (100,90,80);
+child2 c2 = new child2 (70,60,50);
+}
+}
+
+
+//Multilevel Inheritance
+
+class university{
+int pincode;
+  university(){}
+university(int p){
+pincode = p;
+}
+}
+class school extends university {
+int schoolid;
+school (){ super(); }
+  school(int p, int s){ super(p);
+schoolid = s;
+}
+}
+class department extends school{
+int deptid;
+department (){ super(); }
+department (int p, int s, int d){
+super (p,s);
+deptid = d;
+}
+public void showdata() {
+System.out.println ("\n Pin = "+ pincode + " School id = "+ schoolid + " Dept id = "+ deptid);
+}
+}
+
+public class Main {
+public static void main(String[] args) {
+department cse = new department(1001, 101, 1);
+cse.showdata();
+}
+}
+
+
+
+
+
+// Single level inheritance
+
+class student{
+int roll;
+student(){ }
+student (int r){ // parent class parameterized constructor
+roll = r;
+}
+}
+class mca extends student{
+int sem;
+mca () { super (); }
+mca(int r, int s){ // child class parameterized constructor
+super(r);
+    // roll is passed to the parent parameterized constructor
+sem = s;
+}
+public void showdata() {
+System.out.println ("\n Roll = "+ roll + " Semester = "+ sem);
+}
+}
+
+public class Main {
+public static void main(String[] args) {
+mca oindrila = new mca(1,2);
+oindrila.showdata();
+}
+
+}
+
+
+
+
+// Menu driven program to find area of square and rectangle
+package myJavaPrograms;
+import java.util.Scanner;
+
+class SquareRectangle{
+private int x;
+private int y;
+int menu () {
+int choice;
+Scanner sc = new Scanner (System.in);
+System.out.println ("\n 1. Area of Square\n 2. Area of Rectangle \n Enter your choice :");
+choice = sc.nextInt();
+return choice;
+}
+void getdataForSquare() {
+Scanner sc1 = new Scanner(System.in);
+System.out.println ("\n Enter length : ");
+x = sc1.nextInt();
+}
+void getdataForRectangle() {
+Scanner sc2 = new Scanner (System.in);
+Scanner sc3 = new Scanner (System.in);
+System.out.println ("\n Enter length : ");
+x = sc2.nextInt();
+System.out.println ("\n Enter breadth : ");
+y = sc3.nextInt();
+}
+void areaOfSquare() {
+getdataForSquare();
+System.out.println ("\n Area of Square = "+ (x*x));
+}
+void areaOfRectangle() {
+getdataForRectangle();
+System.out.println ("\n Area of Rectangle = "+ (x*y));
+}
+} // End of class SquareRectangle
+
+
+public class programAreaPerimeter {
+public static void main(String[] args) {
+SquareRectangle obj = new SquareRectangle(); // object creation
+switch (obj.menu()) {
+case 1: obj.areaOfSquare(); break;
+case 2: obj.areaOfRectangle(); break;
+default: System.out.println ("\n Wrong choice !!");
+} // End of switch statement
+} // End of main method
+} // End of class
+
+
+
+
+
